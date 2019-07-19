@@ -8,7 +8,7 @@
 #include <fstream>
 #include <sstream>
 
-class OpenGLRender: public QGLWidget
+class OpenGLRender: public QOpenGLWidget
 {
     QOpenGLFunctions* func;
     QOpenGLVertexArrayObject* vao1;

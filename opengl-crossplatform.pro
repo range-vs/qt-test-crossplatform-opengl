@@ -4,9 +4,9 @@
 #
 #-------------------------------------------------
 
-QT       += core gui opengl
-win32
-{
+QT       += gui core opengl
+
+win32 {
     LIBS += -lopengl32 -lglu32
 }
 
@@ -30,10 +30,12 @@ CONFIG += c++17
 
 SOURCES += \
         main.cpp \
-        openglrender.cpp
+        openglrender.cpp \
+        renderopengl.cpp
 
 HEADERS += \
-        openglrender.h
+        openglrender.h \
+        renderopengl.h
 
 FORMS +=
 

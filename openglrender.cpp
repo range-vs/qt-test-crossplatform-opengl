@@ -209,7 +209,7 @@ GLuint OpenGLRender::loadShaders(const char *vertex_file_path, const char *fragm
 }
 
 void OpenGLRender::initializeGL()
-{
+{    
     func = QOpenGLContext::currentContext()->functions();
     func->glClearColor(0.27f, 0.29f, 0.31f, 1.f);
 
@@ -276,7 +276,7 @@ void OpenGLRender::paintGL()
     func->glDisableVertexAttribArray(1);
 }
 
-OpenGLRender::OpenGLRender(QWidget *parent): QGLWidget(parent), angle(0.f)
+OpenGLRender::OpenGLRender(QWidget *parent): QOpenGLWidget(parent), angle(0.f)
 {
 }
 
@@ -288,7 +288,7 @@ OpenGLRender::~OpenGLRender()
 
 void OpenGLRender::updateScene()
 {
-    updateGL();
+    update();
 }
 
 
