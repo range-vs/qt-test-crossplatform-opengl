@@ -233,10 +233,12 @@ void OpenGLRender::initializeGL()
     func->glDepthFunc(GL_LESS);
 
     // get version open gl
-    /*QMessageBox msg;
-    char* version = (char*)glGetString(GL_VERSION);
-    msg.setText(QString(version));
-    msg.exec();*/
+    QString info("OpenGL\nSupport version: ");
+    info += (char*)glGetString(GL_VERSION);
+    info += "\nUsing version: " + QString::number(glFormat.version().first) + "." + QString::number(glFormat.version().second);
+    QMessageBox msg;
+    msg.setText(info);
+    msg.exec();
 }
 
 void OpenGLRender::resizeGL(int w, int h)
