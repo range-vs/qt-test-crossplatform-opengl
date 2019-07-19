@@ -23,6 +23,9 @@ class OpenGLRender: public QOpenGLWidget
     GLuint MatrixID;
     float angle;
 
+    GLuint vertexPosition_modelspaceID;
+    GLuint vertexColorID;
+
     void initScene();
     void initRenderLoop();
     void initCamera();

@@ -46,4 +46,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     shaders/cube.glps \
-    shaders/cube.glvs
+    shaders/cube.glvs \
+    shaders/mac/cube.glps \
+    shaders/mac/cube.glvs

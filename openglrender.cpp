@@ -90,6 +90,9 @@ void OpenGLRender::initScene()
 
     programID = loadShaders( "shaders/cube.glvs", "shaders/cube.glps" );
     MatrixID = func->glGetUniformLocation(programID, "MVP");
+
+    vertexPosition_modelspaceID = func->glGetAttribLocation(programID, "vertexPosition_modelspace");
+    vertexColorID = func->glGetAttribLocation(programID, "color");
 }
 
 void OpenGLRender::initRenderLoop()
@@ -253,10 +256,10 @@ void OpenGLRender::paintGL()
 
     func->glUseProgram(programID);
 
-    func->glEnableVertexAttribArray(0);
+    func->glEnableVertexAttribArray(vertexPosition_modelspaceID);
     func->glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
     func->glVertexAttribPointer(
-       0,
+       vertexPosition_modelspaceID,
        3,                  // Размер
        GL_FLOAT,           // Тип
        GL_FALSE,           // Указывает, что значения не нормализованы
@@ -264,10 +267,10 @@ void OpenGLRender::paintGL()
        static_cast<void*>(0)            // Смещение массива в буфере
     );
 
-    func->glEnableVertexAttribArray(1);
+    func->glEnableVertexAttribArray(vertexColorID);
     func->glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
     func->glVertexAttribPointer(
-        1,
+        vertexColorID,
         3,                                // Размер
         GL_FLOAT,                         // Тип
         GL_FALSE,                         // Нормализован?
@@ -277,8 +280,8 @@ void OpenGLRender::paintGL()
 
     func->glDrawArrays(GL_TRIANGLES, 0, 36);
 
-    func->glDisableVertexAttribArray(0);
-    func->glDisableVertexAttribArray(1);
+    func->glDisableVertexAttribArray(vertexPosition_modelspaceID);
+    func->glDisableVertexAttribArray(vertexColorID);
 }
 
 OpenGLRender::OpenGLRender(QWidget *parent): QOpenGLWidget(parent), angle(0.f)
@@ -287,6 +290,8 @@ OpenGLRender::OpenGLRender(QWidget *parent): QOpenGLWidget(parent), angle(0.f)
 
 OpenGLRender::~OpenGLRender()
 {
+    func->glDeleteBuffers(1, &vertexbuffer);
+    func->glDeleteBuffers(1, &colorbuffer);
     delete vao1;
     delete updateRender;
 }
