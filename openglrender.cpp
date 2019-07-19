@@ -210,6 +210,11 @@ GLuint OpenGLRender::loadShaders(const char *vertex_file_path, const char *fragm
 
 void OpenGLRender::initializeGL()
 {    
+    QSurfaceFormat glFormat;
+    glFormat.setVersion(3, 3);
+    glFormat.setProfile(QSurfaceFormat::CoreProfile);
+    QSurfaceFormat::setDefaultFormat(glFormat);
+
     func = QOpenGLContext::currentContext()->functions();
     func->glClearColor(0.27f, 0.29f, 0.31f, 1.f);
 
